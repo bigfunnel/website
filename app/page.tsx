@@ -1,61 +1,62 @@
-const sources = [
-  ["∞", "Meta lead ad", "New inquiry · no owner yet", "blue"],
-  ["◉", "WhatsApp reply", "Asked for pricing", "green"],
-  ["☎", "Inbound call", "Callback risk", "teal"],
-  ["G", "Google form", "High intent search", "blue"],
-  ["◎", "Instagram DM", "Brochure request", "pink"],
-  ["M", "Email inquiry", "Product questions", "red"],
-  ["T", "Website form", "Demo requested", "violet"],
-  ["f", "Facebook comment", "Asked for details", "blue"],
-  ["S", "Checkout lead", "Abandoned purchase", "green"],
-  ["in", "LinkedIn lead", "Asked for a demo", "blue"],
-  ["SMS", "SMS response", "Replied after offer", "violet"],
-  ["↗", "Old CRM lead", "Untouched for 3 days", "orange"],
+const channelNames = ["META", "WHATSAPP", "CALLS", "FORMS", "EMAIL", "INSTAGRAM", "CHECKOUT", "SMS"];
+const capabilities = [
+  ["01", "Capture", "Every lead enters one system, enriched with its source, context and intent."],
+  ["02", "Decide", "Scoring and routing logic identifies who matters and who should act next."],
+  ["03", "Move", "Automations turn intent into immediate, owned follow-up across every channel."],
+  ["04", "Measure", "Revenue attribution closes the loop from first touch to won business."],
+];
+const teams = [
+  ["Marketing", "See which spend creates pipeline—not just clicks."],
+  ["Sales", "Work one prioritized queue with context already attached."],
+  ["Operations", "Design the rules once. Know they run every time."],
+  ["Leadership", "Read demand, execution and revenue in one view."],
 ];
 
-const audiences = [
-  ["01", "For CMOs", "See which channels create pipeline, where CPL is drifting, and which campaigns deserve more budget."],
-  ["02", "For Sales Heads", "Track ownership, response SLAs, rep load, and every lead that is waiting for action."],
-  ["03", "For Founders", "Replace scattered updates with one clean view of demand, action, and revenue movement."],
-  ["04", "For Ops", "Automate routing rules, dedupe messy sources, and keep every workflow accountable."],
-];
+function Mark(){return <span className="bf-mark" aria-hidden="true"><i></i><i></i><i></i></span>}
+function Brand(){return <a className="bf-brand" href="#top" aria-label="Big Funnel home"><Mark/><span><b>BIG FUNNEL</b><small>BY ARTHATECH SOFTWARES LLP</small></span></a>}
 
-const plans = [
-  {name:"Starter", price:"₹4,999", note:"/ month", items:["Unified lead inbox", "Basic source tagging", "Daily pipeline summary"], cta:"Start"},
-  {name:"Command", price:"₹15,000", note:"setup", featured:true, items:["Done-for-you Meta, WhatsApp, form, and call setup", "Lead scoring, routing rules, and SLA alerts", "Campaign ROI dashboard and sales leaderboard", "Monthly plan from ₹9,999 after deployment"], cta:"Deploy Command"},
-  {name:"Scale", price:"Custom", note:"", items:["Multi-location routing", "Advanced attribution views", "Custom automations and reviews"], cta:"Talk to us"},
-];
+export default function Home(){return <main id="top" className="site">
+  <header className="nav-shell"><Brand/><nav aria-label="Main navigation"><a href="#system">Platform</a><a href="#outcomes">Outcomes</a><a href="#pricing">Pricing</a></nav><a className="nav-action" href="mailto:hello@bigfunnel.co?subject=Big%20Funnel%20deployment">Request access <span>↗</span></a></header>
 
-function Logo({inverse=false}:{inverse?:boolean}) {
-  return <a href="#top" className={`brand ${inverse ? "brand--inverse" : ""}`} aria-label="Big Funnel home"><span className="brand-mark"><i></i><b>BF</b></span><span><strong>Big Funnel</strong><small>by Arthatech Softwares LLP</small></span></a>;
-}
+  <section className="hero-v2">
+    <div className="ambient ambient-a"></div><div className="ambient ambient-b"></div>
+    <div className="hero-kicker"><span>Revenue infrastructure</span><span className="availability"><i></i>Accepting deployments</span></div>
+    <h1>More signal.<br/><em>Less chase.</em></h1>
+    <div className="hero-bottom"><p>Big Funnel turns fragmented demand into one intelligent revenue system—built around how your team actually sells.</p><a className="primary-link" href="mailto:hello@bigfunnel.co?subject=Build%20our%20revenue%20system">Build your system <b>↗</b></a></div>
+    <div className="signal-stage" aria-label="Many lead signals converging into one revenue system"><div className="signal-orbit">{channelNames.map((c,i)=><span key={c} style={{"--i":i} as React.CSSProperties}>{c}</span>)}</div><div className="signal-core"><Mark/><small>ONE SYSTEM</small></div><div className="signal-ray ray-one"></div><div className="signal-ray ray-two"></div></div>
+    <div className="scroll-cue"><i></i><span>SCROLL TO ENTER</span></div>
+  </section>
 
-export default function Home() {
-  return <main id="top">
-    <header className="topbar"><Logo/><nav aria-label="Main navigation"><a href="#platform">Platform</a><a href="#teams">Teams</a><a href="#pricing">Pricing</a><a className="nav-cta" href="mailto:hello@bigfunnel.co?subject=Deploy%20Big%20Funnel">Book a deployment</a></nav></header>
-    <aside className="progress" aria-label="Page progress"><a href="#chaos"><span>01</span>Scattered leads</a><a href="#platform"><span>02</span>Organized pipeline</a><a href="#teams"><span>03</span>Measured operations</a><a href="#pricing"><span>04</span>Revenue control</a></aside>
+  <section className="channel-rail"><p>ONE OPERATING LAYER ACROSS</p><div>{channelNames.map(c=><span key={c}>{c}</span>)}</div></section>
 
-    <section id="chaos" className="hero grid-bg">
-      <div className="hero-card reveal"><div className="eyebrow">Before Big Funnel</div><h1>Your leads are<br/>everywhere.</h1><p>Meta, WhatsApp, calls, forms, Instagram, email, and checkout signals are all real demand. The problem is that they arrive scattered, unowned, and easy to lose.</p><div className="pills"><span>Different channels</span><span>No single owner</span><span>Slow follow-up</span></div></div>
-      <div className="source-field" aria-label="Scattered lead sources">{sources.map((s,i)=><article className={`source source-${i+1}`} key={s[1]}><span className={`source-icon ${s[3]}`}>{s[0]}</span><span><strong>{s[1]}</strong><small>{s[2]}</small></span></article>)}</div>
-    </section>
+  <section className="manifesto">
+    <span className="section-no">01 / THE PROBLEM</span>
+    <h2>Demand is not the problem.<br/><em>Disconnection is.</em></h2>
+    <div className="manifesto-grid"><p>Leads arrive with intent, then disappear into tabs, inboxes, sheets and handoffs. By the time someone owns the next move, the moment has passed.</p><div className="loss-list"><span><i>01</i>Scattered sources<b>NO SHARED CONTEXT</b></span><span><i>02</i>Manual ownership<b>SLOW FIRST ACTION</b></span><span><i>03</i>Broken attribution<b>INVISIBLE REVENUE</b></span></div></div>
+  </section>
 
-    <section id="platform" className="organize dark-grid">
-      <div className="section-copy light"><div className="eyebrow">Big Funnel organizes</div><h2>Scattered signals become one ordered queue.</h2><p>Big Funnel captures each source, labels it, scores it, and routes it into a clean operating lane so sales can act immediately.</p><div className="steps"><span>Capture</span><i></i><span>Deduplicate</span><i></i><span>Score</span><i></i><span>Route</span></div></div>
-      <div className="engine"><div className="engine-head"><Logo inverse/><span className="live">● LIVE</span></div><div className="engine-body"><div className="inbox"><h3>Unified pipeline <small>12 active leads</small></h3>{[["PS","Priya Shah","Meta · 92% fit","Assigned"],["RM","Rohan Mehta","WhatsApp · pricing","Reply sent"],["AR","Aditi Rao","Google · callback","Booked"],["KJ","Kabir Jain","Instagram · sequence","Day 1"]].map((l,i)=><div className="lead" key={l[1]}><b>{l[0]}</b><span><strong>{l[1]}</strong><small>{l[2]}</small></span><em>{l[3]}</em></div>)}</div><div className="score"><span>LEAD SCORE</span><strong>92</strong><div></div><p>High intent<br/><b>Route to senior sales</b></p></div></div><div className="engine-foot"><span>42s<small>median first action</small></span><span>97%<small>leads assigned</small></span><span>3.2x<small>best campaign ROI</small></span></div></div>
-    </section>
+  <section id="system" className="system-section">
+    <div className="system-intro"><span className="section-no">02 / THE SYSTEM</span><h2>One engine.<br/>Every signal.</h2><p>Big Funnel is configured around your acquisition, sales and communication stack—not forced on top of it.</p></div>
+    <div className="system-visual">
+      <div className="visual-top"><span>LIVE REVENUE GRAPH</span><span><i></i>ALL SYSTEMS OPERATIONAL</span></div>
+      <div className="flow-map"><div className="flow-sources">{["Meta / 248","WhatsApp / 181","Website / 96","Calls / 72"].map((x,i)=><span key={x}><b>0{i+1}</b>{x}<i></i></span>)}</div><div className="flow-lines"><i></i><i></i><i></i><i></i></div><div className="flow-hub"><Mark/><b>BIG FUNNEL</b><small>ROUTING ENGINE</small></div><div className="flow-output"><span><small>QUALIFIED TODAY</small><b>147</b></span><span><small>MEDIAN FIRST ACTION</small><b>42s</b></span><span><small>ATTRIBUTED PIPELINE</small><b>₹48.2L</b></span></div></div>
+      <div className="visual-bottom"><span>CAPTURE</span><i></i><span>ENRICH</span><i></i><span>SCORE</span><i></i><span>ROUTE</span><i></i><span>ATTRIBUTE</span></div>
+    </div>
+  </section>
 
-    <section className="measure grid-bg"><div className="section-copy"><div className="eyebrow">Sales motion</div><h2>The pipeline becomes measurable.</h2><p>Every rep, source, campaign, SLA, and outcome is visible in one place. Marketing sees what converts. Sales sees what to do next.</p></div><div className="analytics"><div className="analytics-top"><span><small>PIPELINE VALUE</small><strong>₹48.2L</strong><em>+18.4%</em></span><span><small>LEAD TO MEETING</small><strong>31%</strong><em>+6.2%</em></span><span><small>RESPONSE SLA</small><strong>94%</strong><em>On track</em></span></div><div className="chart"><div className="bars">{[42,58,51,72,63,88,81,96].map((h,i)=><i key={i} style={{height:`${h}%`}}></i>)}</div><div className="chart-copy"><small>ATTRIBUTED REVENUE</small><strong>₹12.6L</strong><span>Meta 46% · Google 31% · Other 23%</span></div></div></div></section>
+  <section className="capabilities"><span className="section-no">03 / THE OPERATING MODEL</span><div className="cap-head"><h2>From arrival<br/>to revenue.</h2><p>A closed operating loop that gives every lead context, every next step an owner, and every outcome a source.</p></div><div className="cap-list">{capabilities.map(c=><article key={c[0]}><span>{c[0]}</span><h3>{c[1]}</h3><p>{c[2]}</p><b>↗</b></article>)}</div></section>
 
-    <section className="control"><div className="section-copy centered"><div className="eyebrow">Business result</div><h2>Control replaces chasing.</h2><p>The CMO gets attribution. The sales head gets ownership. The team gets a clean daily queue instead of a dozen disconnected inboxes.</p></div><div className="results"><article><span>CMO VIEW</span><strong>3.2x</strong><p>best-performing campaign</p><i className="spark">⌁⌁⌁⌁</i></article><article><span>SALES VIEW</span><strong>42 sec</strong><p>median first action</p><i className="ring">94%</i></article><article><span>OPS VIEW</span><strong>97%</strong><p>leads automatically assigned</p><i className="ticks">✓ ✓ ✓ ✓</i></article></div></section>
+  <section id="outcomes" className="outcomes">
+    <span className="section-no">04 / THE CONTROL ROOM</span><div className="outcome-title"><h2>Know what<br/>moves revenue.</h2><p>Every number earns its place. No vanity dashboards. No weekly archaeology.</p></div>
+    <div className="metric-stage"><div className="metric-main"><small>ATTRIBUTED PIPELINE</small><strong>₹48.2L</strong><span><i></i>+18.4% THIS MONTH</span><div className="wave">{[28,40,34,49,45,62,57,73,69,88,82,96].map((h,i)=><i key={i} style={{height:`${h}%`}}></i>)}</div></div><div className="metric-side"><article><small>LEADS ASSIGNED</small><strong>97.4%</strong><div className="meter"><i></i></div></article><article><small>MEDIAN FIRST ACTION</small><strong>00:42</strong><span>↓ 61% FASTER</span></article></div></div>
+  </section>
 
-    <section className="trusted"><p>Trusted by teams who cannot lose leads.</p><div><span>ASTER HOMES</span><span>NORTHLINE</span><span>URBANNEST</span><span>SCALEFIT</span><span>VEDA AUTO</span><span>CLOUDNINE</span></div></section>
+  <section className="team-section"><span className="section-no">05 / BUILT FOR ALIGNMENT</span><div className="team-head"><h2>Four teams.<br/>One truth.</h2></div><div className="team-grid">{teams.map((t,i)=><article key={t[0]}><span>0{i+1}</span><h3>{t[0]}</h3><p>{t[1]}</p><b>↗</b></article>)}</div></section>
 
-    <section id="teams" className="teams"><div className="section-copy"><div className="eyebrow">Built for the revenue team</div><h2>One operating layer for the whole revenue team.</h2><p>Big Funnel is designed around the people who feel lead chaos every day: marketing, sales, founders, and operations.</p></div><div className="audience-grid">{audiences.map(a=><article key={a[1]}><span>{a[0]}</span><h3>{a[1]}</h3><p>{a[2]}</p><b>↗</b></article>)}</div></section>
+  <section id="pricing" className="engagement">
+    <span className="section-no">06 / ENGAGEMENT</span><div className="engage-copy"><h2>Built with you.<br/>Not handed to you.</h2><p>Every Big Funnel deployment starts with your revenue motion—sources, teams, SLAs, stages and attribution. We design the system, connect it and make it operational.</p><a className="primary-link light-button" href="mailto:hello@bigfunnel.co?subject=Scope%20our%20Big%20Funnel%20deployment">Scope a deployment <b>↗</b></a></div><div className="engage-card"><span>COMMAND DEPLOYMENT</span><strong>₹15,000</strong><small>ONE-TIME SYSTEM BUILD</small><ul><li>Revenue architecture workshop</li><li>Source and communication integrations</li><li>Lead scoring and routing logic</li><li>Automation and SLA design</li><li>Attribution and reporting layer</li></ul><p>Ongoing platform plans from ₹9,999 / month</p></div>
+  </section>
 
-    <section id="pricing" className="pricing dark-grid"><div className="section-copy light centered"><div className="eyebrow">Deployment-first pricing</div><h2>Pricing that starts with deployment.</h2><p>Big Funnel is not sold as a login and a tutorial. The system is configured around your lead sources, team, and follow-up motion.</p></div><div className="plans">{plans.map(p=><article className={p.featured?"featured":""} key={p.name}>{p.featured&&<span className="popular">MOST POPULAR</span>}<h3>{p.name}</h3><div className="price">{p.price}<small>{p.note}</small></div><ul>{p.items.map(x=><li key={x}>✓ <span>{x}</span></li>)}</ul><a href={`mailto:hello@bigfunnel.co?subject=${encodeURIComponent(`${p.cta} — Big Funnel`)}`}>{p.cta}<span>↗</span></a></article>)}</div></section>
-
-    <section className="final"><div className="eyebrow">What Big Funnel sells</div><h2>A revenue operating layer<br/>for lead-heavy teams.</h2><p>Not another inbox. Not another dashboard for someone to ignore. Big Funnel turns fragmented demand into routed action and measurable revenue.</p><a className="button" href="mailto:hello@bigfunnel.co?subject=Deploy%20Big%20Funnel">Deploy Big Funnel <span>↗</span></a></section>
-    <footer><div><Logo/><p>CRM · Marketing · Sales · Automation<br/>Communications · Analytics</p></div><div><h4>LEGAL</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a></div><div><h4>CONTACT</h4><a href="mailto:hello@bigfunnel.co">hello@bigfunnel.co</a><p>© 2026 Arthatech Softwares LLP</p></div></footer>
-  </main>;
-}
+  <section className="closing"><Mark/><span>BIG FUNNEL BY ARTHATECH SOFTWARES LLP</span><h2>Turn every signal<br/>into the next move.</h2><a href="mailto:hello@bigfunnel.co?subject=Deploy%20Big%20Funnel">Start the conversation <b>↗</b></a></section>
+  <footer><Brand/><p>CRM · MARKETING · SALES · AUTOMATION<br/>COMMUNICATIONS · ANALYTICS</p><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="mailto:hello@bigfunnel.co">Contact</a></div><small>© 2026 ARTHATECH SOFTWARES LLP</small></footer>
+</main>}

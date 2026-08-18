@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Big Funnel — Every lead. One revenue system.",
     description: "The revenue operating layer for lead-heavy teams, by Arthatech Softwares LLP.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Big Funnel revenue operating platform" }],
+    images: [{ url: "/og-v2.png", width: 1200, height: 630, alt: "Big Funnel — More signal. Less chase." }],
   },
-  twitter: { card: "summary_large_image", images: ["/og.png"] },
+  twitter: { card: "summary_large_image", images: ["/og-v2.png"] },
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}) {
