@@ -3,14 +3,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bigfunnel.co"),
-  title: "Big Funnel — Turn every lead into measurable revenue",
-  description: "Big Funnel by Arthatech Softwares LLP unifies CRM, marketing, sales, automation, communications and analytics.",
+  title: "Big Funnel — WhatsApp Campaigns + CRM",
+  description: "Run WhatsApp campaigns, track every response and manage every lead from first message to final outcome with Big Funnel by Arthatech Softwares LLP.",
   openGraph: {
-    title: "Big Funnel — Every lead. One revenue system.",
-    description: "The revenue operating layer for lead-heavy teams, by Arthatech Softwares LLP.",
-    images: [{ url: "/og-v2.png", width: 1200, height: 630, alt: "Big Funnel — More signal. Less chase." }],
+    title: "Big Funnel — WhatsApp Campaigns + CRM",
+    description: "Turn WhatsApp conversations into managed revenue.",
   },
-  twitter: { card: "summary_large_image", images: ["/og-v2.png"] },
+  twitter: { card: "summary" },
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}) {
