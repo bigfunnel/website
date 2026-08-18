@@ -1,62 +1,38 @@
-const channelNames = ["META", "WHATSAPP", "CALLS", "FORMS", "EMAIL", "INSTAGRAM", "CHECKOUT", "SMS"];
-const capabilities = [
-  ["01", "Capture", "Every lead enters one system, enriched with its source, context and intent."],
-  ["02", "Decide", "Scoring and routing logic identifies who matters and who should act next."],
-  ["03", "Move", "Automations turn intent into immediate, owned follow-up across every channel."],
-  ["04", "Measure", "Revenue attribution closes the loop from first touch to won business."],
+"use client";
+import {useEffect,useRef} from "react";
+
+const sources=["META","WHATSAPP","CALL","GOOGLE","INSTAGRAM","EMAIL","TYPEFORM","SHOPIFY","LINKEDIN","SMS","HUBSPOT","FACEBOOK"];
+const chapters=[
+  ["01 — BEFORE BIG FUNNEL","Your leads are everywhere.","Meta, WhatsApp, calls, forms, Instagram, email and checkout signals are all real demand. The problem is that they arrive scattered, unowned and easy to lose.","SCATTERED LEADS"],
+  ["02 — BIG FUNNEL ORGANIZES","Scattered signals become one ordered queue.","Big Funnel captures each source, labels it, scores it and routes it into a clean operating lane so sales can act immediately.","ORGANIZED PIPELINE"],
+  ["03 — SALES MOTION","The pipeline becomes measurable.","Every rep, source, campaign, SLA and outcome is visible in one place. Marketing sees what converts. Sales sees what to do next.","MEASURED OPERATIONS"],
+  ["04 — BUSINESS RESULT","Control replaces chasing.","The CMO gets attribution. The sales head gets ownership. The team gets a clean daily queue instead of a dozen disconnected inboxes.","REVENUE CONTROL"],
 ];
-const teams = [
-  ["Marketing", "See which spend creates pipeline—not just clicks."],
-  ["Sales", "Work one prioritized queue with context already attached."],
-  ["Operations", "Design the rules once. Know they run every time."],
-  ["Leadership", "Read demand, execution and revenue in one view."],
+const plans=[
+  ["Starter","₹4,999","/ month",["Unified lead inbox","Basic source tagging","Daily pipeline summary"]],
+  ["Command","₹15,000","setup",["Done-for-you channel setup","Scoring, routing and SLA alerts","ROI dashboard and leaderboard","Plans from ₹9,999 after deployment"]],
+  ["Scale","Custom","",["Multi-location routing","Advanced attribution views","Custom automations and reviews"]]
 ];
 
-function Mark(){return <span className="bf-mark" aria-hidden="true"><i></i><i></i><i></i></span>}
-function Brand(){return <a className="bf-brand" href="#top" aria-label="Big Funnel home"><Mark/><span><b>BIG FUNNEL</b><small>BY ARTHATECH SOFTWARES LLP</small></span></a>}
+function Logo(){return <a href="#top" className="logo"><span className="logo-shape"><i/><i/><i/></span><span><b>BIG FUNNEL</b><small>BY ARTHATECH SOFTWARES LLP</small></span></a>}
 
-export default function Home(){return <main id="top" className="site">
-  <header className="nav-shell"><Brand/><nav aria-label="Main navigation"><a href="#system">Platform</a><a href="#outcomes">Outcomes</a><a href="#pricing">Pricing</a></nav><a className="nav-action" href="mailto:hello@bigfunnel.co?subject=Big%20Funnel%20deployment">Request access <span>↗</span></a></header>
+function FunnelScene(){const ref=useRef<HTMLCanvasElement>(null);useEffect(()=>{const c=ref.current;if(!c)return;const ctx=c.getContext("2d")!;let w=0,h=0,dpr=1,raf=0,mx=0,my=0;const pts=Array.from({length:150},(_,i)=>({a:i*2.399,r:1+(i%17)/17*4,z:(i%23)-11,s:1+(i%4)}));
+ const resize=()=>{dpr=Math.min(devicePixelRatio,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;c.style.width=w+"px";c.style.height=h+"px";ctx.setTransform(dpr,0,0,dpr,0,0)};
+ const pointer=(e:PointerEvent)=>{mx=(e.clientX/w-.5)*.7;my=(e.clientY/h-.5)*.45};
+ const draw=()=>{const top=document.querySelector(".story") as HTMLElement;const max=Math.max(1,top.offsetHeight-innerHeight);const p=Math.max(0,Math.min(1,-top.getBoundingClientRect().top/max));const phase=p*3;ctx.clearRect(0,0,w,h);const cx=w*(w<800?.52:.63),cy=h*.5;ctx.save();ctx.translate(cx,cy);ctx.rotate(mx*.08);const scale=Math.min(w,h)/8;
+  ctx.globalCompositeOperation="lighter";pts.forEach((q,i)=>{let x=0,y=0,z=0;const t=performance.now()*.00025;const chaosX=Math.cos(q.a+t*(i%3+1))*(q.r*1.25)+Math.sin(i)*1.4;const chaosY=Math.sin(q.a*1.7+t)*q.r*.75;const chaosZ=q.z*.35+Math.cos(q.a)*2;const lane=(i%7)-3;const queueX=((i%18)-9)*.34,queueY=lane*.32,queueZ=Math.floor(i/18)*.26-2;
+  const chartX=((i%25)-12)*.29,chartY=2.5-Math.sin((i%25)*.36)*1.5-(i%5)*.08,chartZ=(Math.floor(i/25)-3)*.25;
+  if(phase<1){const k=phase;x=chaosX*(1-k)+queueX*k;y=chaosY*(1-k)+queueY*k;z=chaosZ*(1-k)+queueZ*k}else if(phase<2){const k=phase-1;x=queueX;y=queueY*(1-k)+((i%6)-2.5)*.52*k;z=queueZ*(1-k)+chartZ*k}else{const k=phase-2;x=queueX*(1-k)+chartX*k;y=((i%6)-2.5)*.52*(1-k)+chartY*k;z=chartZ}
+  const rot=t*.8+mx;const rx=x*Math.cos(rot)-z*Math.sin(rot),rz=x*Math.sin(rot)+z*Math.cos(rot);const depth=8/(8+rz+my);const sx=rx*scale*depth,sy=y*scale*depth;const alpha=.25+depth*.45;ctx.beginPath();ctx.fillStyle=i%5===0?`rgba(255,172,75,${alpha})`:`rgba(118,111,255,${alpha})`;ctx.shadowBlur=18;ctx.shadowColor=ctx.fillStyle;ctx.arc(sx,sy,q.s*depth,0,Math.PI*2);ctx.fill();if(i%12===0){ctx.strokeStyle=`rgba(255,255,255,${alpha*.2})`;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(0,0);ctx.stroke()}});
+  ctx.globalCompositeOperation="source-over";const grd=ctx.createRadialGradient(0,0,0,0,0,110);grd.addColorStop(0,"rgba(255,186,91,.24)");grd.addColorStop(1,"rgba(84,64,255,0)");ctx.fillStyle=grd;ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.fill();ctx.strokeStyle="rgba(255,255,255,.2)";ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(0,0,85,85,0,0,Math.PI*2);ctx.stroke();ctx.fillStyle="#f6f2e9";ctx.textAlign="center";ctx.font="600 10px Arial";ctx.letterSpacing="2px";ctx.fillText(phase<.85?"SIGNAL":phase<1.85?"ROUTE":phase<2.7?"MEASURE":"REVENUE",0,4);ctx.restore();raf=requestAnimationFrame(draw)};
+ resize();addEventListener("resize",resize);addEventListener("pointermove",pointer);draw();return()=>{cancelAnimationFrame(raf);removeEventListener("resize",resize);removeEventListener("pointermove",pointer)}},[]);return <canvas ref={ref} className="scene" aria-label="Animated lead signals transforming into a measurable revenue pipeline"/>}
 
-  <section className="hero-v2">
-    <div className="ambient ambient-a"></div><div className="ambient ambient-b"></div>
-    <div className="hero-kicker"><span>Revenue infrastructure</span><span className="availability"><i></i>Accepting deployments</span></div>
-    <h1>More signal.<br/><em>Less chase.</em></h1>
-    <div className="hero-bottom"><p>Big Funnel turns fragmented demand into one intelligent revenue system—built around how your team actually sells.</p><a className="primary-link" href="mailto:hello@bigfunnel.co?subject=Build%20our%20revenue%20system">Build your system <b>↗</b></a></div>
-    <div className="signal-stage" aria-label="Many lead signals converging into one revenue system"><div className="signal-orbit">{channelNames.map((c,i)=><span key={c} style={{"--i":i} as React.CSSProperties}>{c}</span>)}</div><div className="signal-core"><Mark/><small>ONE SYSTEM</small></div><div className="signal-ray ray-one"></div><div className="signal-ray ray-two"></div></div>
-    <div className="scroll-cue"><i></i><span>SCROLL TO ENTER</span></div>
-  </section>
-
-  <section className="channel-rail"><p>ONE OPERATING LAYER ACROSS</p><div>{channelNames.map(c=><span key={c}>{c}</span>)}</div></section>
-
-  <section className="manifesto">
-    <span className="section-no">01 / THE PROBLEM</span>
-    <h2>Demand is not the problem.<br/><em>Disconnection is.</em></h2>
-    <div className="manifesto-grid"><p>Leads arrive with intent, then disappear into tabs, inboxes, sheets and handoffs. By the time someone owns the next move, the moment has passed.</p><div className="loss-list"><span><i>01</i>Scattered sources<b>NO SHARED CONTEXT</b></span><span><i>02</i>Manual ownership<b>SLOW FIRST ACTION</b></span><span><i>03</i>Broken attribution<b>INVISIBLE REVENUE</b></span></div></div>
-  </section>
-
-  <section id="system" className="system-section">
-    <div className="system-intro"><span className="section-no">02 / THE SYSTEM</span><h2>One engine.<br/>Every signal.</h2><p>Big Funnel is configured around your acquisition, sales and communication stack—not forced on top of it.</p></div>
-    <div className="system-visual">
-      <div className="visual-top"><span>LIVE REVENUE GRAPH</span><span><i></i>ALL SYSTEMS OPERATIONAL</span></div>
-      <div className="flow-map"><div className="flow-sources">{["Meta / 248","WhatsApp / 181","Website / 96","Calls / 72"].map((x,i)=><span key={x}><b>0{i+1}</b>{x}<i></i></span>)}</div><div className="flow-lines"><i></i><i></i><i></i><i></i></div><div className="flow-hub"><Mark/><b>BIG FUNNEL</b><small>ROUTING ENGINE</small></div><div className="flow-output"><span><small>QUALIFIED TODAY</small><b>147</b></span><span><small>MEDIAN FIRST ACTION</small><b>42s</b></span><span><small>ATTRIBUTED PIPELINE</small><b>₹48.2L</b></span></div></div>
-      <div className="visual-bottom"><span>CAPTURE</span><i></i><span>ENRICH</span><i></i><span>SCORE</span><i></i><span>ROUTE</span><i></i><span>ATTRIBUTE</span></div>
-    </div>
-  </section>
-
-  <section className="capabilities"><span className="section-no">03 / THE OPERATING MODEL</span><div className="cap-head"><h2>From arrival<br/>to revenue.</h2><p>A closed operating loop that gives every lead context, every next step an owner, and every outcome a source.</p></div><div className="cap-list">{capabilities.map(c=><article key={c[0]}><span>{c[0]}</span><h3>{c[1]}</h3><p>{c[2]}</p><b>↗</b></article>)}</div></section>
-
-  <section id="outcomes" className="outcomes">
-    <span className="section-no">04 / THE CONTROL ROOM</span><div className="outcome-title"><h2>Know what<br/>moves revenue.</h2><p>Every number earns its place. No vanity dashboards. No weekly archaeology.</p></div>
-    <div className="metric-stage"><div className="metric-main"><small>ATTRIBUTED PIPELINE</small><strong>₹48.2L</strong><span><i></i>+18.4% THIS MONTH</span><div className="wave">{[28,40,34,49,45,62,57,73,69,88,82,96].map((h,i)=><i key={i} style={{height:`${h}%`}}></i>)}</div></div><div className="metric-side"><article><small>LEADS ASSIGNED</small><strong>97.4%</strong><div className="meter"><i></i></div></article><article><small>MEDIAN FIRST ACTION</small><strong>00:42</strong><span>↓ 61% FASTER</span></article></div></div>
-  </section>
-
-  <section className="team-section"><span className="section-no">05 / BUILT FOR ALIGNMENT</span><div className="team-head"><h2>Four teams.<br/>One truth.</h2></div><div className="team-grid">{teams.map((t,i)=><article key={t[0]}><span>0{i+1}</span><h3>{t[0]}</h3><p>{t[1]}</p><b>↗</b></article>)}</div></section>
-
-  <section id="pricing" className="engagement">
-    <span className="section-no">06 / ENGAGEMENT</span><div className="engage-copy"><h2>Built with you.<br/>Not handed to you.</h2><p>Every Big Funnel deployment starts with your revenue motion—sources, teams, SLAs, stages and attribution. We design the system, connect it and make it operational.</p><a className="primary-link light-button" href="mailto:hello@bigfunnel.co?subject=Scope%20our%20Big%20Funnel%20deployment">Scope a deployment <b>↗</b></a></div><div className="engage-card"><span>COMMAND DEPLOYMENT</span><strong>₹15,000</strong><small>ONE-TIME SYSTEM BUILD</small><ul><li>Revenue architecture workshop</li><li>Source and communication integrations</li><li>Lead scoring and routing logic</li><li>Automation and SLA design</li><li>Attribution and reporting layer</li></ul><p>Ongoing platform plans from ₹9,999 / month</p></div>
-  </section>
-
-  <section className="closing"><Mark/><span>BIG FUNNEL BY ARTHATECH SOFTWARES LLP</span><h2>Turn every signal<br/>into the next move.</h2><a href="mailto:hello@bigfunnel.co?subject=Deploy%20Big%20Funnel">Start the conversation <b>↗</b></a></section>
-  <footer><Brand/><p>CRM · MARKETING · SALES · AUTOMATION<br/>COMMUNICATIONS · ANALYTICS</p><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="mailto:hello@bigfunnel.co">Contact</a></div><small>© 2026 ARTHATECH SOFTWARES LLP</small></footer>
-</main>}
+export default function Home(){return <main id="top"><header><Logo/><nav><a href="#story">How it works</a><a href="#control">Control room</a><a href="#pricing">Pricing</a></nav><a className="pill" href="mailto:hello@bigfunnel.co?subject=Deploy%20Big%20Funnel">Deploy Big Funnel ↗</a></header>
+ <section className="hero"><div className="grain"/><p className="eyebrow">THE REVENUE OPERATING LAYER</p><h1>Every signal.<br/><em>One direction.</em></h1><p className="hero-copy">Big Funnel turns fragmented demand into routed action and measurable revenue.</p><a className="round-link" href="#story">Enter the system <span>↓</span></a><div className="hero-orbit">{sources.map((s,i)=><span key={s} style={{"--n":i} as React.CSSProperties}>{s}</span>)}</div></section>
+ <section id="story" className="story"><div className="sticky"><FunnelScene/><div className="chapter-index">{chapters.map((x,i)=><a href={`#chapter-${i}`} key={x[3]}><i/>0{i+1}</a>)}</div><div className="scene-label">LIVE SIGNAL MODEL / SCROLL TO TRANSFORM</div></div>{chapters.map((x,i)=><article id={`chapter-${i}`} className={`chapter chapter-${i}`} key={x[0]}><div><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p>{i===0&&<div className="tags"><b>Different channels</b><b>No single owner</b><b>Slow follow-up</b></div>}{i===1&&<div className="steps"><b>CAPTURE</b><i/> <b>DEDUPLICATE</b><i/><b>SCORE</b><i/><b>ROUTE</b></div>}</div></article>)}</section>
+ <section id="control" className="control"><div className="control-copy"><span>05 — THE CONTROL ROOM</span><h2>One operating layer.<br/>The whole revenue team.</h2><p>Built for high-intent businesses where speed, ownership and attribution directly affect revenue.</p></div><div className="dashboard"><div className="dash-head"><b>UNIFIED PIPELINE</b><span><i/> LIVE ROUTING</span></div><div className="dash-grid"><div className="queue"><small>NEW AND SCORED</small>{[["Priya Shah","Meta · 92% fit · assigned"],["Rohan Mehta","WhatsApp · pricing · reply sent"],["Aditi Rao","Google · callback booked"]].map((x,i)=><div className="lead" key={x[0]}><i>{i+1}</i><span><b>{x[0]}</b><small>{x[1]}</small></span><strong>{[92,84,78][i]}</strong></div>)}</div><div className="metrics"><article><small>MEDIAN FIRST ACTION</small><b>42s</b><span>↓ 61% faster</span></article><article><small>LEADS ASSIGNED</small><b>97%</b><span>Across all sources</span></article><article><small>BEST CAMPAIGN ROI</small><b>3.2x</b><span>Scale signal detected</span></article></div></div></div>
+ <div className="roles">{[["For CMOs","See which channels create pipeline and deserve more budget."],["For Sales Heads","Track ownership, response SLAs and every lead awaiting action."],["For Founders","See demand, action and revenue movement in one clean view."],["For Ops","Automate routing, dedupe sources and keep workflows accountable."]].map((r,i)=><article key={r[0]}><span>0{i+1}</span><h3>{r[0]}</h3><p>{r[1]}</p></article>)}</div></section>
+ <section id="pricing" className="pricing"><span>06 — PRICING</span><div className="pricing-head"><h2>Pricing that starts<br/>with deployment.</h2><p>Big Funnel is not sold as a login and a tutorial. The system is configured around your lead sources, team and follow-up motion.</p></div><div className="plans">{plans.map((p,i)=><article className={i===1?"featured":""} key={p[0] as string}><small>{i===1?"MOST COMPLETE":"PLAN 0"+(i+1)}</small><h3>{p[0]}</h3><strong>{p[1]}</strong><em>{p[2]}</em><ul>{(p[3] as string[]).map(v=><li key={v}>↗ {v}</li>)}</ul><a href={`mailto:hello@bigfunnel.co?subject=Big%20Funnel%20${p[0]}`}>{i===1?"Deploy Command":"Talk to us"} ↗</a></article>)}</div></section>
+ <section className="final"><Logo/><h2>Turn every signal<br/><em>into the next move.</em></h2><a href="mailto:hello@bigfunnel.co?subject=Deploy%20Big%20Funnel">Start the conversation ↗</a></section>
+ <footer><Logo/><p>CRM · MARKETING · SALES · AUTOMATION<br/>COMMUNICATIONS · ANALYTICS</p><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="mailto:hello@bigfunnel.co">Contact</a></div><small>© 2026 ARTHATECH SOFTWARES LLP</small></footer>
+ </main>}
